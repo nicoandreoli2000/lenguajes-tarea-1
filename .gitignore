@@ -1,0 +1,7 @@
+*.o
+*.txt
+*.hi
+*.hs
+*.x
+*.y
+TestCpp

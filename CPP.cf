@@ -34,8 +34,8 @@ EId.     Exp15  ::= Id ;
 
 EApp.    Exp15  ::= Id "(" [Exp] ")" ;
 
-EStdOut. Exp15 ::= "std" Scope "out" ;
-EStdEndl. Exp15 ::= "std" Scope "endl" ;
+EStdOut. Exp16 ::= "std::out" ;
+EStdEndl. Exp17 ::= "std::endl" ;
 
 EStream. Exp15 ::= Exp15 "<<" Exp15 ;
 
@@ -68,8 +68,6 @@ separator Exp "," ;
 rules Type   ::= "bool" | "int" | "double" | "void" | "string" ;
 
 token Id (letter (letter | digit | '_')*) ;
-
-reserved "::" ;
 
 separator nonempty Id "," ;
 
