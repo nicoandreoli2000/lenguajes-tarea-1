@@ -1,8 +1,8 @@
-PDefs.   Program ::= [Include] [Def] ;
+PDefs.   Program ::= [IncludeKey] [Def] ;
 
-Include. Include ::= "#include" "<" IncludePath ">" ;
+Include. IncludeKey ::= "#include" "<" IncludePath ">" ;
 
-terminator Include "" ;
+terminator IncludeKey "" ;
 
 token IncludePath (letter | digit | '_' | '/' | '.')+ ;
 
@@ -34,10 +34,9 @@ EId.     Exp15  ::= Id ;
 
 EApp.    Exp15  ::= Id "(" [Exp] ")" ;
 
-EStdOut. Exp16 ::= "std::out" ;
-EStdEndl. Exp17 ::= "std::endl" ;
+EScope. Scope ::= "::" ;
 
-EStream. Exp15 ::= Exp15 "<<" Exp15 ;
+EStdOut. Exp15 ::= "std" Scope "cout" "<<" String "<<" "std" Scope "endl" ;
 
 EPIncr.  Exp14  ::= Exp15 "++" ;
 EPDecr.  Exp14  ::= Exp15 "--" ;

@@ -1,7 +1,11 @@
 *.o
 *.txt
+*.txt.bak
 *.hi
 *.hs
+*.hs.bak
 *.x
+*.x.bak
 *.y
+*.y.bak
 TestCpp
