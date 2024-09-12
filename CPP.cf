@@ -1,10 +1,4 @@
-PDefs.   Program ::= [IncludeKey] [Def] ;
-
-Include. IncludeKey ::= "#include" "<" IncludePath ">" ;
-
-terminator IncludeKey "" ;
-
-token IncludePath (letter | digit | '_' | '/' | '.')+ ;
+PDefs.   Program ::= [Def] ;
 
 DFun.    Def    ::= Type Id "(" [Arg] ")" "{" [Stm] "}" ;
 
