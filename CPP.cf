@@ -25,18 +25,16 @@ SIfElse.     Stm ::= "if" "(" Exp ")" Stm "else" Stm ;
 
 terminator Stm "" ;
 
-ETrue.   Exp15  ::= "true" ;
-EFalse.  Exp15  ::= "false" ;
-EInt.    Exp15  ::= Integer ;
-EDouble. Exp15  ::= Double ;
-EString. Exp15  ::= String ;
-EId.     Exp15  ::= Id ; 
+QIdBase. QId ::= Id ;
+
+ETrue.   Exp16  ::= "true" ;
+EFalse.  Exp16  ::= "false" ;
+EInt.    Exp16  ::= Integer ;
+EDouble. Exp16  ::= Double ;
+EString. Exp16  ::= String ;
+EType.   Exp16  ::= [QId];
 
 EApp.    Exp15  ::= Id "(" [Exp] ")" ;
-
-EScope. Scope ::= "::" ;
-
-EStdOut. Exp15 ::= "std" Scope "cout" "<<" String "<<" "std" Scope "endl" ;
 
 EPIncr.  Exp14  ::= Exp15 "++" ;
 EPDecr.  Exp14  ::= Exp15 "--" ;
@@ -48,6 +46,7 @@ ETimes.  Exp12  ::= Exp12 "*"  Exp13 ;
 EDiv.    Exp12  ::= Exp12 "/"  Exp13 ;
 EPlus.   Exp11  ::= Exp11 "+"  Exp12 ;
 EMinus.  Exp11  ::= Exp11 "-"  Exp12 ;
+ELShift. Exp10  ::= Exp10 "<<" Exp11 ;
 ELt.     Exp9   ::= Exp9  "<"  Exp10 ;
 EGt.     Exp9   ::= Exp9  ">"  Exp10 ;
 ELtEq.   Exp9   ::= Exp9  "<=" Exp10 ;
@@ -60,7 +59,7 @@ EAss.    Exp2   ::= Exp3 "=" Exp2 ;
 
 internal ETyped. Exp15 ::= "(" Exp ":" Type ")" ;
 
-coercions Exp 15 ;
+coercions Exp 16 ;
 
 separator Exp "," ;
 
@@ -70,7 +69,8 @@ token Id (letter (letter | digit | '_')*) ;
 
 separator nonempty Id "," ;
 
+separator nonempty QId "::" ;
+
 comment "#" ;
 comment "//" ;
 comment "/*" "*/" ;
-
