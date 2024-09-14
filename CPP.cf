@@ -1,26 +1,28 @@
 PDefs.   Program ::= [Def] ;
 
-DFun.     Def ::= Type Id "(" [Const] ")" "{" [Stm] "}" ;
+DFun.     Def ::= Type Id "(" [Arg] ")" "{" [Stm] "}" ;
+DFunDecl. Def ::= Type Id "(" [Arg] ")" ";" ;
 DUsing.   Def ::= "using" Type ";" ;
+DTypedef. Def ::= "typedef" Type Id ";" ;
 
 terminator Def "" ;
 
-ADecl.   Arg    ::= Type Id ;
-
-ConstBase. Const ::= "const" Arg ;
-ConstArg.  Const ::= Arg ;
-
-separator Const "," ;
+ADecl.   Arg ::= Type Id ;
+AType.   Arg ::= Type ;
+AConst.  Arg ::= "const" Arg ;
 
 separator Arg "," ;
 
 SExp.        Stm ::= Exp ";" ;
 SDecls.      Stm ::= Type [Id] ";" ;
+SConst.      Stm ::= "const" Type Id "=" Exp ";" ;
 SInit.       Stm ::= Type Id "=" Exp ";" ;
 STypedef.    Stm ::= "typedef" Type Id ";" ;
 SReturn.     Stm ::= "return" Exp ";" ;
 SReturnVoid. Stm ::= "return" ";" ;
 SWhile.      Stm ::= "while" "(" Exp ")" Stm ;
+SDoWhile.    Stm ::= "do" Stm "while" "(" Exp ")" ";" ;
+SFor.        Stm ::= "for" "(" Type Id "=" Exp ";" Exp ";" Exp ")" Stm ;
 SBlock.      Stm ::= "{" [Stm] "}" ;
 SIfElse.     Stm ::= "if" "(" Exp ")" Stm "else" Stm ;
 SIf.         Stm ::= "if" "(" Exp ")" Stm ;
@@ -42,11 +44,13 @@ EIndex.  Exp15  ::= Id "[" Exp "]" ;
 
 EPIncr.  Exp14  ::= Exp15 "++" ;
 EPDecr.  Exp14  ::= Exp15 "--" ;
-
+EPDef.   Exp14  ::= "*" Exp15 ;
 EPProp.  Exp14  ::= Exp14 "." Exp15 ;
+EPProp.  Exp14  ::= Exp14 "->" Exp15 ;
 
 EIncr.   Exp13  ::= "++" Exp14 ;
 EDecr.   Exp13  ::= "--" Exp14 ;
+EDist.   Exp13  ::= "!" Exp14 ;
 
 ETimes.  Exp12  ::= Exp12 "*"  Exp13 ;
 EDiv.    Exp12  ::= Exp12 "/"  Exp13 ;
@@ -68,8 +72,8 @@ ENEq.    Exp8   ::= Exp8  "!=" Exp9 ;
 
 EAnd.    Exp4   ::= Exp4  "&&" Exp5 ;
 EOr.     Exp3   ::= Exp3  "||" Exp4 ;
-EAss.    Exp2   ::= Exp3 "=" Exp2 ;
 
+EAss.    Exp2   ::= Exp3 "=" Exp2 ;
 ECond.   Exp2   ::= Exp2 "?" Exp3 ":" Exp3 ;
 
 EThrow.  Exp1   ::= "throw" Exp2 ;
