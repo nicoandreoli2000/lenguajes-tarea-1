@@ -35,6 +35,7 @@ SWhile.      Stm ::= "while" "(" Exp ")" Stm ;
 SDoWhile.    Stm ::= "do" Stm "while" "(" Exp ")" ";" ;
 SFor.        Stm ::= "for" "(" Type Id "=" Exp ";" Exp ";" Exp ")" Stm ;
 SForV.       Stm ::= "for" "(" Id "=" Exp ";" Exp ";" Exp ")" Stm ;
+SForWoV.     Stm ::= "for" "(" Type Id ";" Exp ";" Exp ")" Stm ;
 SBlock.      Stm ::= "{" [Stm] "}" ;
 SIfElse.     Stm ::= "if" "(" Exp ")" Stm "else" Stm ;
 SIf.         Stm ::= "if" "(" Exp ")" Stm ;
@@ -87,6 +88,8 @@ EAnd.    Exp4   ::= Exp4  "&&" Exp5 ;
 EOr.     Exp3   ::= Exp3  "||" Exp4 ;
 
 EAss.    Exp2   ::= Exp3 "=" Exp2 ;
+ESum.    Exp2   ::= Exp3 "+=" Exp2 ;
+EMin.    Exp2   ::= Exp3 "-=" Exp2 ;
 ECond.   Exp2   ::= Exp2 "?" Exp3 ":" Exp3 ;
 
 EThrow.  Exp1   ::= "throw" Exp2 ;
