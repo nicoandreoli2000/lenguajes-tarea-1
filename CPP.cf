@@ -104,14 +104,12 @@ coercions Exp 16 ;
 
 separator Exp "," ;
 
-rules TypeBasic ::= "bool" | "int" | "double" | "void" | "string" ;
- 
-Type.        Type ::= [QualifiedId] ;
-TypePointer. Type ::= [QualifiedId] "&" ;
+rules TypeBasic ::= "bool" | "int" | "double" | "void" | [QualifiedId] ;
+
+rules Type ::= TypeBasic | TypeBasic "&" ;
 
 separator nonempty QualifiedId "::" ;
 
-QIdBase2. QualifiedId ::= TypeBasic ;
 QIdBase1. QualifiedId ::= Id ;
 QIdBase3. QualifiedId ::= Id "<" [Type] ">" ;
 
