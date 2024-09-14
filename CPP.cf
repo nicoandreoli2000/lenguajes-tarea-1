@@ -1,13 +1,13 @@
 PDefs.   Program ::= [Def] ;
 
-DFun.           Def ::= Type Id "(" [Arg] ")" "{" [Stm] "}" ;
-DFunDecl.       Def ::= Type Id "(" [Arg] ")" ";" ;
-DInlineFun.     Def ::= "inline" Type Id "(" [Arg] ")" "{" [Stm] "}" ;
-DInlineFunDecl. Def ::= "inline" Type Id "(" [Arg] ")" ";" ;
+DFun.           Def ::= Type Id "(" [Const] ")" "{" [Stm] "}" ;
+DFunDecl.       Def ::= Type Id "(" [Const] ")" ";" ;
+DInlineFun.     Def ::= "inline" Type Id "(" [Const] ")" "{" [Stm] "}" ;
+DInlineFunDecl. Def ::= "inline" Type Id "(" [Const] ")" ";" ;
 DUsing.         Def ::= "using" Type ";" ;
 DTypedef.       Def ::= "typedef" Type Id ";" ;
 DTypedefArr.    Def ::= "typedef" Type "[" "]" Id ";" ;
-DTypedefStruct. Def ::= "typedef" "struct" Id "{" [StructArg] "}" Id ";" ;
+DTypedefStruct. Def ::= "typedef" "struct" Id "{" [Stm] "}" Id ";" ;
 DStruct.        Def ::= "struct" Id "{" [StructArg] "}" ";" ;
 DInit.          Def ::= Type Id "=" Exp ";" ;
 DDecls.         Def ::= Type [Id] ";" ;
@@ -20,10 +20,12 @@ terminator Def "" ;
 ADecl.  Arg ::= Type Id ;
 AType.  Arg ::= Type ;
 AArr.   Arg ::= Type "[" "]" Id ;
-AConst. Arg ::= "const" Arg ;
 AInit.  Arg ::= Type Id "=" Exp ;
 
-separator Arg "," ;
+Const.    Const ::= "const" Arg ;
+ConstArg. Const ::= Arg ;
+
+separator Const "," ;
 
 SExp.        Stm ::= Exp ";" ;
 SDecls.      Stm ::= Type [Id] ";" ;
@@ -104,8 +106,8 @@ separator Exp "," ;
 
 rules TypeBasic ::= "bool" | "int" | "double" | "void" | "string" ;
  
-TypeQualified.  Type ::= [QualifiedId] ;
-TypeQualified.  Type ::= [QualifiedId] "&" ;
+Type.        Type ::= [QualifiedId] ;
+TypePointer. Type ::= [QualifiedId] "&" ;
 
 separator nonempty QualifiedId "::" ;
 
