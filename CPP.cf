@@ -1,11 +1,16 @@
 PDefs.   Program ::= [Def] ;
 
-DFun.     Def ::= Type Id "(" [Arg] ")" "{" [Stm] "}" ;
+DFun.     Def ::= Type Id "(" [Const] ")" "{" [Stm] "}" ;
 DUsing.   Def ::= "using" Type ";" ;
 
 terminator Def "" ;
 
 ADecl.   Arg    ::= Type Id ;
+
+ConstBase. Const ::= "const" Arg ;
+ConstArg.  Const ::= Arg ;
+
+separator Const "," ;
 
 separator Arg "," ;
 
@@ -67,16 +72,18 @@ EAss.    Exp2   ::= Exp3 "=" Exp2 ;
 
 ECond.   Exp2   ::= Exp2 "?" Exp3 ":" Exp3 ;
 
+EThrow.  Exp1   ::= "throw" Exp2 ;
+
 internal ETyped. Exp15 ::= "(" Exp ":" Type ")" ;
 
 coercions Exp 16 ;
 
 separator Exp "," ;
 
-rules TypeBasic   ::= "bool" | "int" | "double" | "void" | "string" ;
+rules TypeBasic ::= "bool" | "int" | "double" | "void" | "string" ;
  
-TypeQualified.  Type ::= QualifiedName ;
-QName. QualifiedName ::= [QualifiedId] ;
+TypeQualified.  Type ::= [QualifiedId] ;
+TypeQualified.  Type ::= [QualifiedId] "&" ;
 
 separator nonempty QualifiedId "::" ;
 
