@@ -23,6 +23,7 @@ SReturnVoid. Stm ::= "return" ";" ;
 SWhile.      Stm ::= "while" "(" Exp ")" Stm ;
 SDoWhile.    Stm ::= "do" Stm "while" "(" Exp ")" ";" ;
 SFor.        Stm ::= "for" "(" Type Id "=" Exp ";" Exp ";" Exp ")" Stm ;
+SForV.       Stm ::= "for" "(" Id "=" Exp ";" Exp ";" Exp ")" Stm ;
 SBlock.      Stm ::= "{" [Stm] "}" ;
 SIfElse.     Stm ::= "if" "(" Exp ")" Stm "else" Stm ;
 SIf.         Stm ::= "if" "(" Exp ")" Stm ;
@@ -41,6 +42,7 @@ separator nonempty String " " ;
 EType.   Exp15  ::= [QualifiedId] ;
 EApp.    Exp15  ::= Id "(" [Exp] ")" ;
 EIndex.  Exp15  ::= Id "[" Exp "]" ;
+EIndexV. Exp15  ::= Type Id "[" Exp "]" ;
 
 EPIncr.  Exp14  ::= Exp15 "++" ;
 EPDecr.  Exp14  ::= Exp15 "--" ;
