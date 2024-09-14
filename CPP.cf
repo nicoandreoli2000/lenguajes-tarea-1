@@ -7,6 +7,8 @@ DTypedef.       Def ::= "typedef" Type Id ";" ;
 DTypedefArr.    Def ::= "typedef" Type "[" "]" Id ";" ;
 DTypedefStruct. Def ::= "typedef" "struct" Id "{" [Stm] "}" Id ";" ;
 DStruct.        Def ::= "struct" Id "{" [Stm] "}" ";" ;
+DInit.          Def ::= Type Id "=" Exp ";" ;
+
 
 terminator Def "" ;
 
