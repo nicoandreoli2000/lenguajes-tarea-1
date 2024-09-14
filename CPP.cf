@@ -28,6 +28,7 @@ SDecls.      Stm ::= Type [Id] ";" ;
 SConst.      Stm ::= "const" Type Id "=" Exp ";" ;
 SInit.       Stm ::= Type Id "=" Exp ";" ;
 STypedef.    Stm ::= "typedef" Type Id ";" ;
+SStruct.     Stm ::= "struct" Id "{" [Stm] "}" ";" ;
 SReturn.     Stm ::= "return" Exp ";" ;
 SReturnVoid. Stm ::= "return" ";" ;
 SWhile.      Stm ::= "while" "(" Exp ")" Stm ;
