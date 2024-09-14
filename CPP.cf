@@ -1,9 +1,12 @@
 PDefs.   Program ::= [Def] ;
 
-DFun.     Def ::= Type Id "(" [Arg] ")" "{" [Stm] "}" ;
-DFunDecl. Def ::= Type Id "(" [Arg] ")" ";" ;
-DUsing.   Def ::= "using" Type ";" ;
-DTypedef. Def ::= "typedef" Type Id ";" ;
+DFun.           Def ::= Type Id "(" [Arg] ")" "{" [Stm] "}" ;
+DFunDecl.       Def ::= Type Id "(" [Arg] ")" ";" ;
+DUsing.         Def ::= "using" Type ";" ;
+DTypedef.       Def ::= "typedef" Type Id ";" ;
+DTypedefArr.    Def ::= "typedef" Type "[" "]" Id ";" ;
+DTypedefStruct. Def ::= "typedef" "struct" Id "{" [Stm] "}" Id ";" ;
+DStruct.        Def ::= "struct" Id "{" [Stm] "}" ";" ;
 
 terminator Def "" ;
 
