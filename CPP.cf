@@ -19,6 +19,7 @@ ADecl.   Arg ::= Type Id ;
 AType.   Arg ::= Type ;
 AArr.    Arg ::= Type "[" "]" Id ;
 AConst.  Arg ::= "const" Arg ;
+AInit.   Arg ::= Type Id "=" Exp ;
 
 separator Arg "," ;
 
