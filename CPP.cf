@@ -7,19 +7,21 @@ DInlineFunDecl. Def ::= "inline" Type Id "(" [Arg] ")" ";" ;
 DUsing.         Def ::= "using" Type ";" ;
 DTypedef.       Def ::= "typedef" Type Id ";" ;
 DTypedefArr.    Def ::= "typedef" Type "[" "]" Id ";" ;
-DTypedefStruct. Def ::= "typedef" "struct" Id "{" [Stm] "}" Id ";" ;
-DStruct.        Def ::= "struct" Id "{" [Stm] "}" ";" ;
+DTypedefStruct. Def ::= "typedef" "struct" Id "{" [StructArg] "}" Id ";" ;
+DStruct.        Def ::= "struct" Id "{" [StructArg] "}" ";" ;
 DInit.          Def ::= Type Id "=" Exp ";" ;
 DDecls.         Def ::= Type [Id] ";" ;
 
+StructArg. StructArg ::= Type Id ;
+terminator StructArg ";" ;
 
 terminator Def "" ;
 
-ADecl.   Arg ::= Type Id ;
-AType.   Arg ::= Type ;
-AArr.    Arg ::= Type "[" "]" Id ;
-AConst.  Arg ::= "const" Arg ;
-AInit.   Arg ::= Type Id "=" Exp ;
+ADecl.  Arg ::= Type Id ;
+AType.  Arg ::= Type ;
+AArr.   Arg ::= Type "[" "]" Id ;
+AConst. Arg ::= "const" Arg ;
+AInit.  Arg ::= Type Id "=" Exp ;
 
 separator Arg "," ;
 
@@ -28,7 +30,7 @@ SDecls.      Stm ::= Type [Id] ";" ;
 SConst.      Stm ::= "const" Type Id "=" Exp ";" ;
 SInit.       Stm ::= Type Id "=" Exp ";" ;
 STypedef.    Stm ::= "typedef" Type Id ";" ;
-SStruct.     Stm ::= "struct" Id "{" [Stm] "}" ";" ;
+SStruct.     Stm ::= "struct" Id "{" [StructArg] "}" ";" ;
 SReturn.     Stm ::= "return" Exp ";" ;
 SReturnVoid. Stm ::= "return" ";" ;
 SWhile.      Stm ::= "while" "(" Exp ")" Stm ;
