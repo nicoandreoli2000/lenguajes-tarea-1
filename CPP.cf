@@ -19,15 +19,13 @@ SIfElse.     Stm ::= "if" "(" Exp ")" Stm "else" Stm ;
 
 terminator Stm "" ;
 
-QIdBase. QId ::= Id ;
-
 ETrue.   Exp16  ::= "true" ;
 EFalse.  Exp16  ::= "false" ;
 EInt.    Exp16  ::= Integer ;
 EDouble. Exp16  ::= Double ;
 EString. Exp16  ::= String ;
-EType.   Exp16  ::= [QId];
 
+EType.   Exp15  ::= [QualifiedId];
 EApp.    Exp15  ::= Id "(" [Exp] ")" ;
 
 EPIncr.  Exp14  ::= Exp15 "++" ;
@@ -41,6 +39,7 @@ EDiv.    Exp12  ::= Exp12 "/"  Exp13 ;
 EPlus.   Exp11  ::= Exp11 "+"  Exp12 ;
 EMinus.  Exp11  ::= Exp11 "-"  Exp12 ;
 ELShift. Exp10  ::= Exp10 "<<" Exp11 ;
+ERShift. Exp10  ::= Exp10 ">>" Exp11 ;
 ELt.     Exp9   ::= Exp9  "<"  Exp10 ;
 EGt.     Exp9   ::= Exp9  ">"  Exp10 ;
 ELtEq.   Exp9   ::= Exp9  "<=" Exp10 ;
@@ -57,13 +56,18 @@ coercions Exp 16 ;
 
 separator Exp "," ;
 
-rules Type   ::= "bool" | "int" | "double" | "void" | "string" ;
+rules TypeBasic   ::= "bool" | "int" | "double" | "void" | "string" ;
+ 
+TypeQualified.  Type ::= QualifiedName ;
+QIdBase.        QualifiedId ::= Id ;
+QIdBaseType.    QualifiedId ::= TypeBasic ;
+QName.          QualifiedName ::= [QualifiedId] ;
+
+separator nonempty QualifiedId "::" ;
 
 token Id (letter (letter | digit | '_')*) ;
 
 separator nonempty Id "," ;
-
-separator nonempty QId "::" ;
 
 comment "#" ;
 comment "//" ;
