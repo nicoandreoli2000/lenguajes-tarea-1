@@ -1,6 +1,7 @@
 PDefs.   Program ::= [Def] ;
 
 DFun.    Def    ::= Type Id "(" [Arg] ")" "{" [Stm] "}" ;
+DUsing.  Def    ::= "using" Type ";" ;
 
 terminator Def "" ;
 
@@ -11,6 +12,7 @@ separator Arg "," ;
 SExp.        Stm ::= Exp ";" ;
 SDecls.      Stm ::= Type [Id] ";" ;
 SInit.       Stm ::= Type Id "=" Exp ";" ;
+STypedef.    Stm ::= "typedef" Type Id ";" ;
 SReturn.     Stm ::= "return" Exp ";" ;
 SReturnVoid. Stm ::= "return" ";" ;
 SWhile.      Stm ::= "while" "(" Exp ")" Stm ;
@@ -19,17 +21,22 @@ SIfElse.     Stm ::= "if" "(" Exp ")" Stm "else" Stm ;
 
 terminator Stm "" ;
 
+EChar.   Exp16  ::= Char ;
 ETrue.   Exp16  ::= "true" ;
 EFalse.  Exp16  ::= "false" ;
 EInt.    Exp16  ::= Integer ;
 EDouble. Exp16  ::= Double ;
-EString. Exp16  ::= String ;
+EString. Exp16  ::= [String] ;
+
+separator nonempty String " " ;
 
 EType.   Exp15  ::= [QualifiedId];
 EApp.    Exp15  ::= Id "(" [Exp] ")" ;
 
 EPIncr.  Exp14  ::= Exp15 "++" ;
 EPDecr.  Exp14  ::= Exp15 "--" ;
+
+EPProp.  Exp14  ::= Exp14 "." Exp15 ;
 
 EIncr.   Exp13  ::= "++" Exp14 ;
 EDecr.   Exp13  ::= "--" Exp14 ;
@@ -59,11 +66,16 @@ separator Exp "," ;
 rules TypeBasic   ::= "bool" | "int" | "double" | "void" | "string" ;
  
 TypeQualified.  Type ::= QualifiedName ;
-QIdBase.        QualifiedId ::= Id ;
-QIdBaseType.    QualifiedId ::= TypeBasic ;
-QName.          QualifiedName ::= [QualifiedId] ;
+QName. QualifiedName ::= [QualifiedId] ;
 
 separator nonempty QualifiedId "::" ;
+
+QIdBase1. QualifiedId ::= Id ;
+QIdBase2. QualifiedId ::= TypeBasic ;
+QIdBase3. QualifiedId ::= Id "<" [Type] ">" ;
+
+separator nonempty Type "," ;
+
 
 token Id (letter (letter | digit | '_')*) ;
 
