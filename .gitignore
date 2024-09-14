@@ -10,3 +10,5 @@
 *.y.bak
 TestCpp
 *.info
+progs-test-lab1
+lab1-test-dir/*
